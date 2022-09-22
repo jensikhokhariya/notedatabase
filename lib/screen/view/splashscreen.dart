@@ -44,7 +44,7 @@ class _Splash_ScreenState extends State<Splash_Screen> {
   }
   void get() {
     Timer(Duration(seconds: 3), () {
-      Get.to(Home_Page());
+      Get.off(Home_Page());
     });
   }
 }
