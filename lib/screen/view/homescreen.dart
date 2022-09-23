@@ -14,6 +14,8 @@ class Home_Page extends StatefulWidget {
 class _Home_PageState extends State<Home_Page> {
   Homecontroller homecontroller = Get.put(Homecontroller());
   TextEditingController task = TextEditingController();
+  bool ischk = false;
+  Icon isicon = Icon(Icons.check_circle_outline);
 
   @override
   Widget build(BuildContext context) {
@@ -38,26 +40,30 @@ class _Home_PageState extends State<Home_Page> {
 
                 for (var x in data.children) {
                   Taskmodel t1 = Taskmodel(
-                      task: x.child("task").value.toString(),
-                      key: x.key);
+                      task: x.child("task").value.toString(), key: x.key);
                   l1.add(t1);
                 }
                 return ListView.builder(
                     itemCount: l1.length,
                     itemBuilder: (context, index) {
                       return ListTile(
-                        // leading: Checkbox(value: , onChanged: (value){
-                        //
-                        // }),
+                        leading: IconButton(
+                          onPressed: () {
+                            // ischk
+                            //     ? Icon(Icons.check_circle_outline)
+                            //     : Icon(Icons.check_circle);
+                          },
+                          icon: Icon(Icons.check_circle_outline),
+                        ),
                         title: Text("${l1[index].task}"),
-                        trailing: SizedBox
-                          (
+                        trailing: SizedBox(
                           width: 100,
                           child: Row(
                             children: [
                               IconButton(
                                 onPressed: () {
-                                  task = TextEditingController(text: l1[index].task);
+                                  task = TextEditingController(
+                                      text: l1[index].task);
                                   DilogeBox(l1[index].key.toString());
                                 },
                                 icon: Icon(Icons.edit),
