@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 
 class Homecontroller extends GetxController {
+  bool ischk=false;
   void adddata({String? task,String? key}
       ){
     var firebaseDatabase = FirebaseDatabase.instance;
@@ -30,6 +31,7 @@ class Homecontroller extends GetxController {
     return dbref.child("Task").child(key).remove();
   }
 }
+
 class Taskmodel{
   String? task,key;
 

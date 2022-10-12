@@ -15,7 +15,7 @@ class _Home_PageState extends State<Home_Page> {
   Homecontroller homecontroller = Get.put(Homecontroller());
   TextEditingController task = TextEditingController();
   bool ischk = false;
-  Icon isicon = Icon(Icons.check_circle_outline);
+  List chk=[];
 
   @override
   Widget build(BuildContext context) {
@@ -47,14 +47,9 @@ class _Home_PageState extends State<Home_Page> {
                     itemCount: l1.length,
                     itemBuilder: (context, index) {
                       return ListTile(
-                        leading: IconButton(
-                          onPressed: () {
-                            // ischk
-                            //     ? Icon(Icons.check_circle_outline)
-                            //     : Icon(Icons.check_circle);
-                          },
-                          icon: Icon(Icons.check_circle_outline),
-                        ),
+                        leading: Checkbox(value: chk[1], onChanged: (value){
+
+                        }),
                         title: Text("${l1[index].task}"),
                         trailing: SizedBox(
                           width: 100,
@@ -88,6 +83,8 @@ class _Home_PageState extends State<Home_Page> {
               );
             }),
         floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.green.shade400,
+
           onPressed: () {
             task = TextEditingController();
             DilogeBox(null);
