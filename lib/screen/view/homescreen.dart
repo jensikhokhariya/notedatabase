@@ -14,7 +14,6 @@ class Home_Page extends StatefulWidget {
 class _Home_PageState extends State<Home_Page> {
   Homecontroller homecontroller = Get.put(Homecontroller());
   TextEditingController task = TextEditingController();
-  bool ischk = false;
   List chk=[];
 
   @override
@@ -40,15 +39,15 @@ class _Home_PageState extends State<Home_Page> {
 
                 for (var x in data.children) {
                   Taskmodel t1 = Taskmodel(
-                      task: x.child("task").value.toString(), key: x.key);
+                      task: x.child("task").value.toString(), key: x.key,status: x.child("status").value.toString()=="true"?true:false);
                   l1.add(t1);
                 }
                 return ListView.builder(
                     itemCount: l1.length,
                     itemBuilder: (context, index) {
                       return ListTile(
-                        leading: Checkbox(value: chk[1], onChanged: (value){
-
+                        leading: Checkbox(value: l1[index].status, onChanged: (value){
+                          homecontroller.Status(status:value,key:l1[index].key,task:l1[index].task);
                         }),
                         title: Text("${l1[index].task}"),
                         trailing: SizedBox(
@@ -61,11 +60,11 @@ class _Home_PageState extends State<Home_Page> {
                                       text: l1[index].task);
                                   DilogeBox(l1[index].key.toString());
                                 },
-                                icon: Icon(Icons.edit),
+                                icon: Icon(Icons.edit,color: Colors.green.shade400,),
                               ),
                               IconButton(
                                 onPressed: () {
-                                  homecontroller.delete(l1[index].key);
+                                  homecontroller.delete(l1[index].key!);
                                 },
                                 icon: Icon(
                                   Icons.delete,
@@ -111,7 +110,7 @@ class _Home_PageState extends State<Home_Page> {
             ),
             ElevatedButton(
               onPressed: () {
-                homecontroller.adddata(task: task.text, key: key);
+                homecontroller.adddata(task: task.text, key: key,status: false);
               },
               child: Text("Create"),
             ),
